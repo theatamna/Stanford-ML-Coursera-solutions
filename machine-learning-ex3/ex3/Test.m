@@ -1,0 +1,12 @@
+clear ; clc;
+load('ex3data1.mat');
+lambda = 0.01;
+theta = ones(400,1);
+m = length(y);
+J = 0;
+grad = zeros(size(theta));
+h = sigmoid(X*theta);
+J = -(1/m)*(y'*log(h) + (1-y)'*log(1-h)) + (lambda/(2*m))*(theta(2:end)'*theta(2:end));
+Xt = X';
+grad(1) = (1/m)*(Xt(1,:)*(h-y));
+grad(2:end) = (1/m)*(Xt(2:end,:)*(h-y)) + (lambda/m)*theta(2:end);
